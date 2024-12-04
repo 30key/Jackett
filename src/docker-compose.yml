@@ -10,8 +10,8 @@ services:
       - AUTO_UPDATE=true #optional
       - RUN_OPTS= #optional
     volumes:
-      - /path/to/jackett/data:/config
-      - /path/to/blackhole:/downloads
+      - /usr/src:/config
+      - /usr/src:/downloads
     ports:
       - 9217:9217
     restart: unless-stopped
