@@ -1,12 +1,17 @@
-docker run -d \
-  --name=jackett \
-  -e PUID=1000 \
-  -e PGID=1000 \
-  -e TZ=Etc/UTC \
-  -e AUTO_UPDATE=true `#optional` \
-  -e RUN_OPTS= `#optional` \
-  -p 9117:9117 \
-  -v /path/to/jackett/data:/config \
-  -v /path/to/src:/downloads \
-  --restart unless-stopped \
-  lscr.io/linuxserver/jackett:latest
+---
+services:
+  jackett:
+    image: lscr.io/linuxserver/jackett:latest
+    container_name: jackett
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Etc/UTC
+      - AUTO_UPDATE=true #optional
+      - RUN_OPTS= #optional
+    volumes:
+      - /path/to/jackett/data:/config
+      - /path/to/blackhole:/downloads
+    ports:
+      - 9117:9117
+    restart: unless-stopped
